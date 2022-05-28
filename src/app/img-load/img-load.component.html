@@ -1,0 +1,19 @@
+<form>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label class="label" label>Enter a name/URL of image in s3:</mat-label>
+    <input matInput [(ngModel)]="pathToLoad" placeholder="Enter s3 image/URL name" name="input">
+  </mat-form-field>
+  <br>
+  <label for="select"> Or: </label>
+  <br>
+
+  <mat-form-field id="select" appearance="fill" (mouseenter)="refreshFilesList()" (mousedown)="onClickSelect()">
+    <mat-label>Images on bucket</mat-label>
+    <mat-select [(value)]="selectedOption">
+      <mat-option *ngFor="let file of listOfFiles" [value]="file.Key">
+        {{file.Key}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="mat-button" (click)="displayImage()">show</button>
+</form>

@@ -1,0 +1,20 @@
+<mat-grid-list cols="3" rowHeight="200px" gutterSize="15px" class="app-container">
+  <mat-grid-tile rowspan="2" colspan="2">
+    <app-img-display [imgSource]="imgSource"></app-img-display>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="1">
+    <mat-label class="title">You can upload an image</mat-label>
+    <app-file-upload (fileUploaded)="fileUploaded($event)"></app-file-upload>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="1">
+    <mat-label class="title">And you can pick an existing image,
+      and we will get it by SignedURL
+    </mat-label>
+    <app-img-load class="app-img-load" (fileSelectedEvent)="pathToLoadSelected($event)"
+                  [listOfFiles]="listOfFiles"
+                  (needToRefreshFilesList)="getListOfFiles()"
+                  (updateFilesList)="updateListOfFiles()"
+    ></app-img-load>
+  </mat-grid-tile>
+</mat-grid-list>
+

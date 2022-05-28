@@ -1,0 +1,13 @@
+<div class="component">
+  <a class="card" (click)="fileUpload.click()">
+    <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*" #fileUpload>
+    <div class="file-upload">
+      <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      {{fileName || "Choose image to upload"}}
+    </div>
+  </a>
+  <button mat-raised-button color="primary" type="submit" class="mat-flat-button" (click)="uploadImage()">Upload!
+  </button>
+</div>

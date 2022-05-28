@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  }
+
+.mat-input-element{
+  width: 100%;
+  margin: 5px;
+}
+
+.mat-button{
+  margin: 10px;
+}
