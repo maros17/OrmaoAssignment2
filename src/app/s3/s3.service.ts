@@ -8,6 +8,8 @@ import SendData = ManagedUpload.SendData;
 })
 export class S3Service {
 
+  _accessKey: string = "";
+  _secretAccessKey: string = "";
   _bucket: S3;
   readonly _bucketName: string = "exerciseormaotech";
   private _allFilesList: any[] = [];
@@ -85,5 +87,32 @@ export class S3Service {
       if (data.Contents !== undefined)
         this.allFilesList = data.Contents;
     })
+  }
+  async setCredsAndCheck(accessKey: string, secretAccessKey: string) {
+    let success: boolean = false;
+    this._accessKey = accessKey;
+    this._secretAccessKey = secretAccessKey;
+    this._bucket = new S3(
+      {
+        accessKeyId: this._accessKey,
+        secretAccessKey: this._secretAccessKey,
+        region: 'eu-central-1',
+      }
+    );
+    try {
+
+      await this._bucket.headBucket({Bucket: this._bucketName}, function (err, data)  {
+        if (!err) {
+          success = true;
+          console.log("data");
+          console.log(data);
+        }
+      }).promise()
+      ;
+    } catch (e) {
+      console.log("error in s3");
+      // console.log(e);
+    }
+    return success;
   }
 }

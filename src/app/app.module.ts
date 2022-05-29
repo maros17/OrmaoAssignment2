@@ -17,13 +17,15 @@ import {Overlay} from "@angular/cdk/overlay";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
+import { CredsComponent } from './creds/creds.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadComponent,
     ImgDisplayComponent,
-    ImgLoadComponent
+    ImgLoadComponent,
+    CredsComponent
   ],
   imports: [
     BrowserModule,

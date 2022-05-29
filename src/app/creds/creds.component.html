@@ -1,0 +1,18 @@
+<form ngForm [formGroup]="credsForm" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label for="accessKey">Enter accessKeyId</mat-label>
+    <input matInput formControlName="accessKey" id="accessKey" placeholder="Enter accessKeyId">
+    <mat-error >You must enter accessKey</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label for="secretAccessKey">Enter Secret Access Key</mat-label>
+    <input type="password" matInput formControlName="secretAccessKey" id="secretAccessKey" placeholder="Enter Secret Access Key">
+    <mat-error >You must enter accessKey</mat-error>
+  </mat-form-field>
+  <!--    <mat-form-field>-->
+  <br>
+  <button mat-raised-button [disabled]="credsForm.invalid || success" type="submit" color="primary" name="button">Enter</button>
+  <!--    </mat-form-field>-->
+  <div *ngIf="success">Successs</div>
+  <div *ngIf="!success">buuu</div>
+</form>
