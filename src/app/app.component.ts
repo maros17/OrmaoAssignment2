@@ -1,5 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {S3Service} from "./s3/s3.service";
+import {MatDialog} from "@angular/material/dialog";
+import {CredsComponent} from "./creds/creds.component";
 
 @Component({
   selector: 'app-root',
@@ -23,8 +25,21 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  constructor(private _s3: S3Service) {
+  constructor(private _s3: S3Service, public dialog: MatDialog) {
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CredsComponent, {
+      width: '250px',
+      data:
+        {name: "", animal: "this.animal"},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+
 
   _imgSource: string = "";
   title = 'OrmaoAssignment';

@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import {ManagedUpload} from "aws-sdk/lib/s3/managed_upload";
 import SendData = ManagedUpload.SendData;
+import {rejects} from "assert";
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,7 @@ export class S3Service {
     };
     return this._bucket.getSignedUrl("getObject", params);
   }
+
   isInBucket(name: string) {
     let files: S3.ObjectList | undefined;
     this._bucket.listObjectsV2({Bucket: this._bucketName}, (err, data) => {
@@ -79,6 +81,7 @@ export class S3Service {
     return false;
 
   }
+
   getFilesList() {
     const params = {
       Bucket: this._bucketName
@@ -88,6 +91,7 @@ export class S3Service {
         this.allFilesList = data.Contents;
     })
   }
+
   async setCredsAndCheck(accessKey: string, secretAccessKey: string) {
     let success: boolean = false;
     this._accessKey = accessKey;
@@ -101,17 +105,23 @@ export class S3Service {
     );
     try {
 
-      await this._bucket.headBucket({Bucket: this._bucketName}, function (err, data)  {
-        if (!err) {
+      await this._bucket.headBucket({Bucket: this._bucketName}, function (err, data) {
+        if (data) {
           success = true;
           console.log("data");
           console.log(data);
+          return true;
         }
-      }).promise()
+
+          return false;
+      }).promise().then((value) =>{return value})
+        .catch((value)=> {
+        console.log("error in catch " + value);
+      })
       ;
     } catch (e) {
+
       console.log("error in s3");
-      // console.log(e);
     }
     return success;
   }

@@ -9,15 +9,20 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
-import { ImgDisplayComponent } from './img-display/img-display.component';
-import { ImgLoadComponent } from './img-load/img-load.component';
-import {FormsModule} from "@angular/forms";
+import {ImgDisplayComponent} from './img-display/img-display.component';
+import {ImgLoadComponent} from './img-load/img-load.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
-import { CredsComponent } from './creds/creds.component';
+import {CredsComponent} from './creds/creds.component';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialog,
+  MatDialogModule, MatDialogRef
+} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -37,9 +42,11 @@ import { CredsComponent } from './creds/creds.component';
     FormsModule,
     MatSelectModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
-  providers: [S3Service, MatSnackBar, Overlay],
+  providers: [S3Service, MatSnackBar, Overlay, MatDialog,MatDialogRef ,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
