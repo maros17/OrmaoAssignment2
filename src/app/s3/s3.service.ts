@@ -1,20 +1,22 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import * as S3 from 'aws-sdk/clients/s3';
+import S3 from 'aws-sdk/clients/s3';
 import {ManagedUpload} from "aws-sdk/lib/s3/managed_upload";
 import SendData = ManagedUpload.SendData;
-import {rejects} from "assert";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class S3Service {
-
+  success: boolean = false;
+  eve: EventEmitter<boolean> = new EventEmitter<boolean>();
   _accessKey: string = "";
   _secretAccessKey: string = "";
   _bucket: S3;
   readonly _bucketName: string = "exerciseormaotech";
   private _allFilesList: any[] = [];
   fileUploaded = new EventEmitter();
+  filesListUpdated = new EventEmitter();
 
   get allFilesList(): any[] {
     return this._allFilesList;
@@ -87,13 +89,14 @@ export class S3Service {
       Bucket: this._bucketName
     }
     this._bucket.listObjectsV2(params, (err, data) => {
-      if (data.Contents !== undefined)
+      if (data.Contents !== undefined) {
         this.allFilesList = data.Contents;
+        this.filesListUpdated.emit(this.allFilesList);
+      }
     })
   }
 
-  async setCredsAndCheck(accessKey: string, secretAccessKey: string) {
-    let success: boolean = false;
+  setCredsAndCheck(accessKey: string, secretAccessKey: string) {
     this._accessKey = accessKey;
     this._secretAccessKey = secretAccessKey;
     this._bucket = new S3(
@@ -103,26 +106,14 @@ export class S3Service {
         region: 'eu-central-1',
       }
     );
-    try {
 
-      await this._bucket.headBucket({Bucket: this._bucketName}, function (err, data) {
-        if (data) {
-          success = true;
-          console.log("data");
-          console.log(data);
-          return true;
-        }
-
-          return false;
-      }).promise().then((value) =>{return value})
-        .catch((value)=> {
-        console.log("error in catch " + value);
-      })
-      ;
-    } catch (e) {
-
-      console.log("error in s3");
-    }
-    return success;
+    this._bucket.headBucket({Bucket: this._bucketName},  (err, data)=> {
+      if (data) {
+        this.success = true;
+        console.log("data");
+        console.log(data);
+        this.eve.emit(true);
+      }
+    })
   }
 }

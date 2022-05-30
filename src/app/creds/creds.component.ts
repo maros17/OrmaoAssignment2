@@ -3,7 +3,8 @@ import {S3Service} from "../s3/s3.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-interface DialogData {
+
+class DialogData {
 }
 
 @Component({
@@ -36,17 +37,13 @@ export class CredsComponent implements OnInit {
   }
 
   submit() {
-    this._s3.setCredsAndCheck(this.accessKey?.value, this.secretAccessKey?.value)
-      .then((success) => {
-        if (success) {
-          this.success = success;
-          this.dialogRef.close()
-        }
-        console.log(success);
-      }).catch((value) => {
-      console.log("Error in creds comp " + value)
+    this._s3.eve.subscribe(res => {
+      if (res)
+        this.success = res;
+        this.dialogRef.close()
     })
-    ;
-
+    this._s3.setCredsAndCheck(this.accessKey?.value, this.secretAccessKey?.value);
   }
+
+
 }

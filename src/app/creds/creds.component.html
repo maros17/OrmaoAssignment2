@@ -13,7 +13,6 @@
   <br>
   <button mat-raised-button [disabled]="credsForm.invalid || success" type="submit" color="primary" name="button">Enter</button>
   <!--    </mat-form-field>-->
-  <p *ngIf="success" color="green">Successs</p>
+  <label *ngIf="success" class="success">Successs</label>
   <p *ngIf="!success" class="">buuu</p>
-  <li></li>
 </form>

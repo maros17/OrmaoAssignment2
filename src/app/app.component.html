@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="200px" gutterSize="15px" class="app-container">
+<mat-grid-list *ngIf="!isDialogOpen" cols="3" rowHeight="200px" gutterSize="15px" class="app-container" (mouseenter)="openDialog()">
   <mat-grid-tile rowspan="2" colspan="2">
     <app-img-display [imgSource]="imgSource"></app-img-display>
   </mat-grid-tile>
@@ -13,14 +13,8 @@
     <app-img-load class="app-img-load" (fileSelectedEvent)="pathToLoadSelected($event)"
                   [listOfFiles]="listOfFiles"
                   (needToRefreshFilesList)="getListOfFiles()"
-                  (updateFilesList)="updateListOfFiles()"
     ></app-img-load>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <app-creds></app-creds>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button (click)="openDialog()">open dialog</button>
+<!--                  (updateFilesList)="updateListOfFiles()"-->
   </mat-grid-tile>
 </mat-grid-list>
 

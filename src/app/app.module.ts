@@ -19,6 +19,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {CredsComponent} from './creds/creds.component';
 import {
+  MAT_DIALOG_DATA,
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatDialog,
   MatDialogModule, MatDialogRef
@@ -46,7 +47,10 @@ import {
     ReactiveFormsModule,
     MatDialogModule
   ],
-  providers: [S3Service, MatSnackBar, Overlay, MatDialog,MatDialogRef ,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+  providers: [S3Service, MatSnackBar, Overlay, MatDialog, {provide: MatDialogRef,useValue: {} }
+    , {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    {provide: MAT_DIALOG_DATA, useValue: []}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
