@@ -37,6 +37,7 @@ export class AppComponent implements AfterViewInit {
     if (!this._s3.success && !this.isDialogOpen) {
       const dialogRef = this.dialog.open(CredsComponent, {
         width: '250px',
+
         // hasBackdrop: true,
         panelClass: 'full-panel',
         backdropClass: 'custom-backdrop',
