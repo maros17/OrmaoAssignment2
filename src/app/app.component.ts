@@ -1,9 +1,8 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {S3Service} from "./s3/s3.service";
-import {MatDialog, MatDialogState} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {CredsComponent} from "./creds/creds.component";
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTestDialogOpenerModule} from '@angular/material/dialog/testing';
+
 
 @Component({
   selector: 'app-root',
@@ -11,6 +10,8 @@ import {MatTestDialogOpenerModule} from '@angular/material/dialog/testing';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
+  title = 'OrmaoAssignment';
+
   isDialogOpen = false;
 
   get imgSource(): string {
@@ -37,9 +38,8 @@ export class AppComponent implements AfterViewInit {
     if (!this._s3.success && !this.isDialogOpen) {
       const dialogRef = this.dialog.open(CredsComponent, {
         width: '250px',
-
-        // hasBackdrop: true,
-        panelClass: 'full-panel',
+        hasBackdrop: true,
+        panelClass: "full-panel",
         backdropClass: 'custom-backdrop',
         disableClose: true
       });
@@ -53,7 +53,6 @@ export class AppComponent implements AfterViewInit {
 
 
   _imgSource: string = "";
-  title = 'OrmaoAssignment';
 
   fileUploaded(path: string) {
     this.imgSource = path;

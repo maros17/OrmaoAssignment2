@@ -47,8 +47,10 @@ import {
     ReactiveFormsModule,
     MatDialogModule
   ],
-  providers: [S3Service, MatSnackBar, Overlay, MatDialog, {provide: MatDialogRef,useValue: {} }
-    , {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+  providers: [S3Service, MatSnackBar, Overlay, MatDialog,
+    {provide: MatDialogRef, useValue: {}},
+    // {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    // {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {}},
     {provide: MAT_DIALOG_DATA, useValue: []}
   ],
   bootstrap: [AppComponent]

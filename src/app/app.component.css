@@ -30,8 +30,4 @@ mat-grid-tile {
   margin-top: 50px;
 }
 
-.custom-backdrop {
-  filter: blur(20px);
-  background-color: #caa4a4;
-  opacity: 0.7 !important;
-}
+

@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 .custom-backdrop {
-  filter: blur(20px);
-  background-color: #caa4a4;
-  opacity: 0.7 !important;
+  background-color: gray;
+  opacity: .2 !important;
 }

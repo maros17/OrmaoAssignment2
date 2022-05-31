@@ -1,22 +1,23 @@
 <h2 matDialogTitle>Enter S3 credentials</h2>
 <mat-dialog-content>
-  <form ngForm [formGroup]="credsForm" (ngSubmit)="submit()">
+  <form ngForm [formGroup]="credsForm">
     <mat-form-field appearance="fill">
-      <mat-label for="accessKey">Enter accessKeyId</mat-label>
+      <mat-label>Enter accessKeyId</mat-label>
       <input matInput formControlName="accessKey" id="accessKey" placeholder="Enter accessKeyId">
-      <mat-error>You must enter accessKey</mat-error>
+      <mat-error>You must enter access key</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label for="secretAccessKey">Enter Secret Access Key</mat-label>
+      <mat-label>Enter Secret Access Key</mat-label>
       <input type="password" matInput formControlName="secretAccessKey" id="secretAccessKey"
              placeholder="Enter Secret Access Key">
-      <mat-error>You must enter accessKey</mat-error>
+      <mat-error>You must enter secret access key</mat-error>
     </mat-form-field>
     <!--    <mat-form-field>-->
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button [disabled]="credsForm.invalid || success" type="submit" color="primary" name="button">
+  <button mat-raised-button [disabled]="credsForm.invalid || success" type="submit" color="primary" name="button"
+          (click)="submit()">
     Enter
   </button>
   <!--    </mat-form-field>-->
